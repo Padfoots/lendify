@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  django:
+    build:
+      context: .
+      dockerfile: dockerfile
+    env_file:
+      - .env
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    volumes:
+      - static_volume:/usr/src/app/static
+      # - ./back-end:/usr/src/app
+    command: gunicorn lendify.wsgi:application --bind 0.0.0.0:8000
+
+    
+
+  db:
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_DB: lendify
+      POSTGRES_USER: lendify_admin
+      POSTGRES_PASSWORD: l3nd1fy_@dm1n
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+volumes:
+  postgres_data:
+  static_volume:

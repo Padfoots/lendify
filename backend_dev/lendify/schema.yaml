@@ -1,0 +1,784 @@
+openapi: 3.0.3
+info:
+  title: 'Django Lendify Banking Loan Application '
+  version: 0.0.0
+paths:
+  /api/bank-personnel/fund/update-limit/:
+    post:
+      operationId: bank_personnel_fund_update_limit_create
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fund'
+          description: ''
+    patch:
+      operationId: bank_personnel_fund_update_limit_partial_update
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fund'
+          description: ''
+  /api/bank-personnel/funds/applications/{fund_application_id}/action/{action}/:
+    post:
+      operationId: bank_personnel_funds_applications_action_create
+      parameters:
+      - in: path
+        name: action
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: fund_application_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundApplication'
+          description: ''
+  /api/bank-personnel/funds/fund-applications/:
+    get:
+      operationId: bank_personnel_funds_fund_applications_retrieve
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundApplication'
+          description: ''
+  /api/bank-personnel/loans/add/loan-package/:
+    post:
+      operationId: bank_personnel_loans_add_loan_package_create
+      tags:
+      - bank-personnel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanPackage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoanPackage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LoanPackage'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanPackage'
+          description: ''
+  /api/bank-personnel/loans/application/{loan_application_id}/action/{action}/:
+    post:
+      operationId: bank_personnel_loans_application_action_create
+      parameters:
+      - in: path
+        name: action
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: loan_application_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLoanApplication'
+          description: ''
+  /api/bank-personnel/loans/loan-applications/:
+    get:
+      operationId: bank_personnel_loans_loan_applications_retrieve
+      description: Endpoint for BankPersonnel to get a list of all loan applications.
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLoanApplication'
+          description: ''
+  /api/bank-personnel/loans/loan-packages/{id}/:
+    get:
+      operationId: bank_personnel_loans_loan_packages_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanPackage'
+          description: ''
+    put:
+      operationId: bank_personnel_loans_loan_packages_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanPackage'
+          description: ''
+    delete:
+      operationId: bank_personnel_loans_loan_packages_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/bank-personnel/payments/:
+    get:
+      operationId: bank_personnel_payments_retrieve
+      tags:
+      - bank-personnel
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/loan-customer/loan-packages/:
+    get:
+      operationId: loan_customer_loan_packages_retrieve
+      tags:
+      - loan-customer
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLoanPackages'
+          description: ''
+  /api/loan-customer/loans/applications/:
+    get:
+      operationId: loan_customer_loans_applications_retrieve
+      tags:
+      - loan-customer
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLoanApplication'
+          description: ''
+  /api/loan-customer/loans/applications/apply/:
+    post:
+      operationId: loan_customer_loans_applications_apply_create
+      tags:
+      - loan-customer
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanApplication'
+          description: ''
+  /api/loan-customer/payments/:
+    get:
+      operationId: loan_customer_payments_retrieve
+      tags:
+      - loan-customer
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/loan-customer/payments/pay-installment/:
+    post:
+      operationId: loan_customer_payments_pay_installment_create
+      tags:
+      - loan-customer
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/loan-provider/funds/applications/:
+    get:
+      operationId: loan_provider_funds_applications_retrieve
+      tags:
+      - loan-provider
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundApplication'
+          description: ''
+  /api/loan-provider/funds/apply/:
+    post:
+      operationId: loan_provider_funds_apply_create
+      tags:
+      - loan-provider
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/token/refresh/:
+    post:
+      operationId: token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/user/login/:
+    post:
+      operationId: user_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomTokenObtainPair'
+          description: ''
+  /api/user/register/:
+    post:
+      operationId: user_register_create
+      tags:
+      - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRegistration'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomerRegistration'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomerRegistration'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerRegistration'
+          description: ''
+components:
+  schemas:
+    CustomTokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - password
+      - username
+    CustomerRegistration:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        user_type:
+          $ref: '#/components/schemas/UserTypeEnum'
+      required:
+      - id
+      - password
+      - user_type
+      - username
+    Fund:
+      type: object
+      properties:
+        funding_limit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,18}(?:\.\d{0,2})?$
+    FundApplication:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        amount_requested:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,18}(?:\.\d{0,2})?$
+        status:
+          $ref: '#/components/schemas/FundApplicationStatusEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        LoanProvider:
+          type: integer
+      required:
+      - LoanProvider
+      - amount_requested
+      - created_at
+      - id
+      - updated_at
+    FundApplicationStatusEnum:
+      enum:
+      - pending
+      - approved
+      - active
+      - rejected
+      type: string
+      description: |-
+        * `pending` - Pending
+        * `approved` - Approved
+        * `active` - Active
+        * `rejected` - Rejected
+    GetLoanApplication:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        loan_package:
+          type: string
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        term_months:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        status:
+          $ref: '#/components/schemas/GetLoanApplicationStatusEnum'
+        applied_at:
+          type: string
+          format: date-time
+          readOnly: true
+        outstanding_balance:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        installment_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          nullable: true
+        due_date:
+          type: string
+          format: date
+          nullable: true
+        customer:
+          type: integer
+      required:
+      - amount
+      - applied_at
+      - customer
+      - id
+      - loan_package
+      - term_months
+    GetLoanApplicationStatusEnum:
+      enum:
+      - PENDING
+      - APPROVED
+      - Active
+      - REJECTED
+      type: string
+      description: |-
+        * `PENDING` - Pending
+        * `APPROVED` - Approved
+        * `Active` - Active
+        * `REJECTED` - Rejected
+    GetLoanPackages:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        interest_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
+        max_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        min_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        min_duration_months:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        max_duration_months:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        description:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - interest_rate
+      - max_amount
+      - max_duration_months
+      - min_amount
+      - min_duration_months
+      - name
+      - updated_at
+    LoanApplication:
+      type: object
+      properties:
+        loan_package:
+          type: integer
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        term_months:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+      required:
+      - amount
+      - loan_package
+      - term_months
+    LoanPackage:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        interest_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
+        max_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        min_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        min_duration_months:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        max_duration_months:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        description:
+          type: string
+      required:
+      - interest_rate
+      - max_amount
+      - max_duration_months
+      - min_amount
+      - min_duration_months
+      - name
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    UserTypeEnum:
+      enum:
+      - loan_provider
+      - loan_customer
+      type: string
+      description: |-
+        * `loan_provider` - Loan Provider
+        * `loan_customer` - Loan Customer
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

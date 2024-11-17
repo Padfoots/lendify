@@ -1,0 +1,12 @@
+FROM python:3.12-alpine
+
+WORKDIR /usr/src/app
+
+COPY requirements.txt ./
+
+RUN pip install -r requirements.txt
+
+COPY . .
+WORKDIR /usr/src/app/lendify 
+EXPOSE 8000
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "lendify.wsgi:application"] 
