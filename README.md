@@ -35,6 +35,7 @@ Welcome to the Lending System project! This guide will help you get started with
    Use Docker Compose to build and start the project:
 
    ```bash
+   cd /backend_dev
    docker-compose up --build
    ```
 
