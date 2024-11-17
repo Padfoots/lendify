@@ -1,0 +1,4 @@
+.notes.ctb/*
+notes.ctb
+uml_diagrams/.*
+backend_dev/postgres_data/
